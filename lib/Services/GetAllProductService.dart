@@ -6,7 +6,7 @@ import '../Helper/Api.dart';
 class AllProductsService {
   Future<List<Product>> getAllProducts() async {
     Response response =
-        await Api(Dio()).get(url: 'https://fakestoreapi.com/products');
+        await Api().get(url: 'https://fakestoreapi.com/products');
 
     List<dynamic> jsonData = response.data;
     List<Product> products = [];
