@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class Api {
   Future<Response> get({required String url}) async {
@@ -8,5 +9,16 @@ class Api {
     else
       throw Exception(
           "There is a problem in status Code ${response.statusCode}");
+  }
+
+  Future<Response> post(
+      {required String url,
+      @required dynamic body,
+      @required String? token}) async {
+    Map<String, String> headers = {};
+    if (token != null) headers.addAll({'Authorization': 'Bearer $token'});
+    Response response =
+        await Dio().post(url, data: body, queryParameters: headers);
+    return response;
   }
 }
