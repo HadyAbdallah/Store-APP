@@ -2,15 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:my_store/Helper/Api.dart';
 import 'package:my_store/Models/Product.dart';
 
-class UpdateProduct{
-Future<Product> addProduct(
+class UpdateProduct {
+  Future<Product> updateProduct(
       {required String title,
       required String price,
       required String description,
       required String image,
       required String category}) async {
     Response response =
-        await Api().post(url: "https://fakestoreapi.com/products", body: {
+        await Api().put(url: "https://fakestoreapi.com/products", body: {
       "title": title,
       "price": price,
       "description": description,
@@ -18,4 +18,5 @@ Future<Product> addProduct(
       "category": category
     });
     return Product.fromJson(response.data);
+  }
 }
