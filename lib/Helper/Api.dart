@@ -31,9 +31,8 @@ class Api {
       @required dynamic body,
       @required String? token}) async {
     Map<String, String> headers = {};
-    headers.addAll({'Authorization': 'Bearer $token'});
-    if (token != null)
-      headers.addAll({'Content-Type': 'application/x-www-form-urlencoded'});
+    headers.addAll({'Content-Type': 'application/x-www-form-urlencoded'});
+    if (token != null) headers.addAll({'Authorization': 'Bearer $token'});
     Response response =
         await Dio().put(url, data: body, queryParameters: headers);
     if (response.statusCode == 200)

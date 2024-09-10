@@ -3,7 +3,7 @@ import 'package:my_store/Helper/Api.dart';
 
 import '../Models/Product.dart';
 
-class GetCategory {
+class GetCategoryService {
   Future<List<Product>> getCategory({required String categoryName}) async {
     Response response = await Api()
         .get(url: 'https://fakestoreapi.com/products/category/$categoryName');

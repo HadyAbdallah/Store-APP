@@ -12,7 +12,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, UpdateProdactPage.id);
+        Navigator.pushNamed(context, UpdateProdactPage.id, arguments: product);
       },
       child: Stack(
         clipBehavior: Clip.none,
@@ -26,6 +26,7 @@ class CustomCard extends StatelessWidget {
                   offset: Offset(10, 10))
             ]),
             child: Card(
+              color: const Color.fromARGB(255, 108, 63, 181),
               elevation: 8,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -40,7 +41,7 @@ class CustomCard extends StatelessWidget {
                           ' ' +
                           product.title.split(' ')[2],
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Color.fromARGB(255, 245, 245, 245),
                         fontSize: 16,
                       ),
                     ),
@@ -53,7 +54,7 @@ class CustomCard extends StatelessWidget {
                         Text(
                           r'$' '${product.price.toString()}',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Color.fromARGB(255, 211, 172, 255),
                             fontSize: 16,
                           ),
                         ),
