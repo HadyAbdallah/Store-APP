@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_store/Models/Product.dart';
+import 'package:my_store/Services/GetAllProductService.dart';
+
+import '../Widgets/CustomCard.dart';
 
 class HomePage extends StatelessWidget {
   static String id = 'HomePage';
@@ -7,86 +11,51 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.black,
-              ))
-        ],
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          'New Trend',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      body: Center(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              height: 130,
-              width: 220,
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                    blurRadius: 40,
-                    color: Colors.grey.withOpacity(.3),
-                    spreadRadius: 0,
-                    offset: Offset(10, 10))
-              ]),
-              child: Card(
-                elevation: 8,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "HandBage Egy",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            r'$250',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-                top: -65,
-                right: 30,
-                child: Image.network(
-                  'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                  height: 120,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
                 ))
           ],
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            'New Trend',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
-      ),
-    );
+        body: Padding(
+            padding: const EdgeInsets.only(
+              top: 85,
+              right: 16,
+              left: 16,
+            ),
+            child: FutureBuilder<List<Product>>(
+              future: AllProductsService().getAllProducts(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Product> productsList = snapshot.data!;
+                  return GridView.builder(
+                      itemCount: productsList.length,
+                      clipBehavior: Clip.none,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.3,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 100,
+                      ),
+                      itemBuilder: (context, index) {
+                        return CustomCard(product: productsList[index]);
+                      });
+                } else
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+              },
+            )));
   }
 }

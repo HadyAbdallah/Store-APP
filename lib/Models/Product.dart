@@ -1,7 +1,7 @@
 class Product {
   final int id;
   final String title;
-  final double price;
+  final num price;
   final String description;
   final String image;
   final Rating rating;
@@ -26,7 +26,7 @@ class Product {
 }
 
 class Rating {
-  final double rate;
+  final num rate;
   final int count;
 
   Rating({required this.rate, required this.count});
