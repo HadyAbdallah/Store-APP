@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               ))
         ],
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 108, 63, 181),
+        backgroundColor: const Color(0xff6C3FB5),
         elevation: 0,
         title: Text(
           'New Trend',
